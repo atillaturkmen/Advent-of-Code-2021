@@ -5,13 +5,8 @@ typedef long long ll;
 
 int main() {
     ll ans = 0;
-    ll first;
-    ll second;
-    ll third;
-    cin >> first;
-    cin >> second;
-    cin >> third;
-    ll next;
+    ll first, second, third, next;
+    cin >> first >> second >> third;
     while (cin >> next) {
         ll sum1 = first + second + third;
         ll sum2 = second + third + next;
