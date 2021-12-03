@@ -1,5 +1,4 @@
 #include <iostream>
-#include<cmath>
 
 using namespace std;
 typedef long long ll;
@@ -22,9 +21,9 @@ int main() {
     ll epsilon = 0;
     for (ll i = 0; i < length; i++) {
         if (sum[i] > 0) {
-            gamma += pow(2, length - i - 1);
+            gamma += 1 << (length - i - 1); // += pow(2, (length - i - 1))
         } else {
-            epsilon += pow(2, length - i - 1);
+            epsilon += 1 << (length - i - 1); // += pow(2, (length - i - 1))
         }
     }
     cout << gamma * epsilon;
