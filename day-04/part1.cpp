@@ -5,17 +5,7 @@
 using namespace std;
 typedef long long ll;
 
-// https://stackoverflow.com/questions/14265581/parse-split-a-string-in-c-using-string-delimiter-standard-c
-vector<string> split(string in, const string& delimiter) {
-    ll pos;
-    vector<string> split;
-    while ((pos = in.find(delimiter)) != string::npos) {
-        split.push_back(in.substr(0, pos));
-        in.erase(0, pos + delimiter.length());
-    }
-    split.push_back(in);
-    return split;
-}
+vector<string> split(string, const string&);
 
 int main() {
     string in;
@@ -74,4 +64,16 @@ int main() {
         }
     }
     return 0;
+}
+
+// https://stackoverflow.com/questions/14265581/parse-split-a-string-in-c-using-string-delimiter-standard-c
+vector<string> split(string in, const string& delimiter) {
+    ll pos;
+    vector<string> split;
+    while ((pos = in.find(delimiter)) != string::npos) {
+        split.push_back(in.substr(0, pos));
+        in.erase(0, pos + delimiter.length());
+    }
+    split.push_back(in);
+    return split;
 }
