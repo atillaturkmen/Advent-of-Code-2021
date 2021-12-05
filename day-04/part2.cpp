@@ -52,6 +52,11 @@ int main() {
             game.emplace_back(row.begin(), row.end());
         }
     }
+    ll lastScore;
+    unordered_set<int> haveNotWon;
+    for (int b = 0; b < boards.size(); b++) {
+        haveNotWon.insert(b);
+    }
     // start bingo
     for (const string& s : random) {
         int next = stoi(s);
@@ -61,17 +66,19 @@ int main() {
                 g.erase(next);
                 if (g.empty()) { // BINGO
                     ll boardNo = j / 10;
+                    if (haveNotWon.find(boardNo) == haveNotWon.end()) continue; // already won
                     ll sum = 0;
                     for (ll k = boardNo * 10; k < boardNo*10 + 5; k++) {
                         for (int l : game[k]) {
                             sum += l;
                         }
                     }
-                    cout << sum * next << endl;
-                    return 0;
+                    lastScore = sum * next;
+                    haveNotWon.erase(boardNo);
                 }
             }
         }
     }
+    cout << lastScore << endl;
     return 0;
 }
