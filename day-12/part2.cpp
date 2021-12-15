@@ -9,6 +9,7 @@ typedef long long ll;
 vector<unordered_set<ll>> graph;
 unordered_set<ll> canVisitMore;
 ll startCode, endCode;
+bool visitedTwice = false;
 
 void assignCode(const string &s, ll &lastCode, unordered_map<string, ll> &code);
 
@@ -41,14 +42,18 @@ void backTrack(ll &ans, vector<ll> &visited, ll cur) {
     visited[cur]++;
     if (cur == endCode)
         ans++;
+    if (canVisitMore.find(cur) == canVisitMore.end() && visited[cur] > 1)
+        visitedTwice = true;
     else {
         for (ll adj : graph[cur]) {
             if (adj == startCode) continue;
-            if (canVisitMore.find(adj) == canVisitMore.end() && visited[adj] > 1) continue;
+            if (canVisitMore.find(adj) == canVisitMore.end() && visited[adj] > 0 && visitedTwice) continue;
             backTrack(ans, visited, adj);
         }
     }
     visited[cur]--;
+    if (canVisitMore.find(cur) == canVisitMore.end() && visited[cur] == 1)
+        visitedTwice = false;
 }
 
 void assignCode(const string &s, ll &lastCode, unordered_map<string, ll> &code) {
